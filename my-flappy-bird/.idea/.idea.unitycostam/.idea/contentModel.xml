@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Zabor\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Zabor\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_unitycostam.1616922563.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Zabor\Desktop\unitycostam" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="Background.cs" t="Include" />
+          <e p="Bird.cs" t="Include" />
+          <e p="Ground.cs" t="Include" />
+          <e p="GroundSpawner.cs" t="Include" />
+          <e p="Pipes.cs" t="Include" />
+          <e p="PipesSpawner.cs" t="Include" />
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="unitycostam.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>
