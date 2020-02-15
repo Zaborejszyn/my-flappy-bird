@@ -16,6 +16,7 @@ public class Ground : MonoBehaviour {
     void Update() {
         Transform transform1 = transform;
         if (!bird.GetIsDead()) {
+            Debug.Log(Time.time);
             float newPosition = Mathf.Repeat(horizontalSpeed * Time.time, 1.68f);
             transform1.position = startPosition + Vector3.left * newPosition;
         }
