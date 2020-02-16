@@ -529,7 +529,6 @@ MonoBehaviour:
   upForce: 125
   rb: {fileID: 1332403345}
   anim: {fileID: 1332403343}
-  pipes: {fileID: 408859643465540597, guid: f6c8020a19a582a43afb4ba357638160, type: 3}
 --- !u!50 &1332403345
 Rigidbody2D:
   serializedVersion: 4

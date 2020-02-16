@@ -8,23 +8,25 @@ using UnityEngine.SceneManagement;
 public class Bird : MonoBehaviour {
     public float upForce = 200;
     private bool isDead;
+    private bool onPipe;
     public Rigidbody2D rb;
     public Animator anim;
     private static readonly int IsDead = Animator.StringToHash("IsDead");
     private Vector2 lastVelocity;
 
     void Start() {
-        
     }
 
     void Update() {
-        Vector2 vel = rb.velocity;
-        float ang = Mathf.Atan2(vel.y, 10) * Mathf.Rad2Deg;
-        transform.root.rotation = Quaternion.Euler(new Vector3(0, 0, ang));
         if (!isDead) {
-            if (IsTapped()) {
-                rb.velocity = Vector2.zero;
-                rb.AddForce(new Vector2(0, upForce));
+            Vector2 vel = rb.velocity;
+            float ang = Mathf.Atan2(vel.y, 10) * Mathf.Rad2Deg;
+            transform.root.rotation = Quaternion.Euler(new Vector3(0, 0, ang));
+            if (!onPipe) {
+                if (IsTapped()) {
+                    rb.velocity = Vector2.zero;
+                    rb.AddForce(new Vector2(0, upForce));
+                }
             }
         } else {
             if (IsTapped()) {
@@ -32,11 +34,11 @@ public class Bird : MonoBehaviour {
             }
         }
     }
-    
+
     private void FixedUpdate() {
         lastVelocity = rb.velocity;
     }
-    
+
     private bool IsTapped() {
         if (Input.touchCount > 0) {
             Touch touch = Input.GetTouch(0);
@@ -66,7 +68,7 @@ public class Bird : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        isDead = true;
+        onPipe = true;
         anim.SetBool(IsDead, true);
     }
 }
