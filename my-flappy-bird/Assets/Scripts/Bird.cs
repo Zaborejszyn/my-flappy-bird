@@ -16,14 +16,14 @@ public class Bird : MonoBehaviour {
 
     void Start() {
         //Debug.Log(pipes.GetComponentsInChildren<Collider2D>()[1] + "; " + GetComponent<Collider2D>());
-        Physics2D.IgnoreCollision(GameObject.Find("Pipes(Clone)").GetComponentsInChildren<Collider2D>()[1], GetComponent<Collider2D>());
+        //Physics2D.IgnoreCollision(GameObject.Find("Pipes(Clone)").GetComponentsInChildren<Collider2D>()[1], GetComponent<Collider2D>());
     }
 
     void Update() {
+        Vector2 vel = rb.velocity;
+        float ang = Mathf.Atan2(vel.y, 10) * Mathf.Rad2Deg;
+        transform.root.rotation = Quaternion.Euler(new Vector3(0, 0, ang));
         if (!isDead) {
-            Vector2 vel = rb.velocity;
-            float ang = Mathf.Atan2(vel.y, 10) * Mathf.Rad2Deg;
-            transform.root.rotation = Quaternion.Euler(new Vector3(0, 0, ang));
             if (IsTapped()) {
                 rb.velocity = Vector2.zero;
                 rb.AddForce(new Vector2(0, upForce));
@@ -68,6 +68,11 @@ public class Bird : MonoBehaviour {
                 rb.AddTorque(lastVelocity.y + 3);
             }
         }
+        isDead = true;
+        anim.SetBool(IsDead, true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
         isDead = true;
         anim.SetBool(IsDead, true);
     }

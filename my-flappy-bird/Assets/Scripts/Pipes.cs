@@ -9,6 +9,9 @@ public class Pipes : MonoBehaviour {
     void Start() {
         horizontalSpeed = GameObject.Find("Background").GetComponent<Background>().horizontalSpeed;
         bird = GameObject.Find("Bird").GetComponent<Bird>();
+        //Debug.Log(GameObject.Find("Bird").GetComponent<Collider2D>() + "; " + GetComponentsInChildren<Collider2D>()[0]);
+        //Physics2D.IgnoreCollision(GameObject.Find("Bird").GetComponent<Collider2D>(), GetComponentsInChildren<Collider2D>()[0]);
+        //Physics2D.IgnoreCollision(GameObject.Find("Bird").GetComponent<Collider2D>(), GetComponentsInChildren<Collider2D>()[1]);
     }
     
     void Update() {
