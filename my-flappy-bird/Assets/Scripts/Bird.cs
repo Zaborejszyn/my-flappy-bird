@@ -56,6 +56,10 @@ public class Bird : MonoBehaviour {
         return isDead;
     }
 
+    public bool GetOnPipe() {
+        return onPipe;
+    }
+
     private void OnCollisionEnter2D(Collision2D other) {
         if (!isDead) {
             if (other.gameObject.name.Equals("Ground")) {
