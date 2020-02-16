@@ -21,7 +21,7 @@ public class Bird : MonoBehaviour {
         if (!isDead) {
             Vector2 vel = rb.velocity;
             float ang = Mathf.Atan2(vel.y, 10) * Mathf.Rad2Deg;
-            transform.root.rotation = Quaternion.Euler(new Vector3(0, 0, ang));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, ang));
             if (!onPipe) {
                 if (IsTapped()) {
                     rb.velocity = Vector2.zero;
@@ -46,7 +46,7 @@ public class Bird : MonoBehaviour {
                 return true;
             }
         }
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
             return true;
         }
         return false;
