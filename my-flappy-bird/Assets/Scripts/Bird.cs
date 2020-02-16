@@ -12,11 +12,9 @@ public class Bird : MonoBehaviour {
     public Animator anim;
     private static readonly int IsDead = Animator.StringToHash("IsDead");
     private Vector2 lastVelocity;
-    public GameObject pipes;
 
     void Start() {
-        //Debug.Log(pipes.GetComponentsInChildren<Collider2D>()[1] + "; " + GetComponent<Collider2D>());
-        //Physics2D.IgnoreCollision(GameObject.Find("Pipes(Clone)").GetComponentsInChildren<Collider2D>()[1], GetComponent<Collider2D>());
+        
     }
 
     void Update() {
@@ -37,7 +35,6 @@ public class Bird : MonoBehaviour {
     
     private void FixedUpdate() {
         lastVelocity = rb.velocity;
-        //Physics2D.IgnoreCollision(GameObject.Find("Pipes(Clone)").GetComponentsInChildren<Collider2D>()[1], GetComponent<Collider2D>());
     }
     
     private bool IsTapped() {
@@ -58,10 +55,6 @@ public class Bird : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.name.Equals("Upper pipe") || other.gameObject.name.Equals("Lower pipe")) {
-            Debug.Log("Hello pipe");
-            //Physics2D.IgnoreCollision(other.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        }
         if (!isDead) {
             if (other.gameObject.name.Equals("Ground")) {
                 rb.AddForce(new Vector2(Mathf.Abs(lastVelocity.y) * 15, 15));
