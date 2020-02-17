@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PipesSpawner : MonoBehaviour {
     public float waitTime;
@@ -8,14 +10,17 @@ public class PipesSpawner : MonoBehaviour {
     public GameObject pipes;
     public float height;
     private Bird bird;
-    
-    void Start() {
+
+    private void Awake() {
         bird = GameObject.Find("Bird").GetComponent<Bird>();
+    }
+
+    private void Start() {
         GameObject newPipes = Instantiate(pipes);
         newPipes.transform.position = transform.position + new Vector3(0, Random.Range(-height, height), 0);
     }
 
-    void Update() {
+    private void Update() {
         if (!bird.GetIsDead()) {
             if (timer > waitTime) {
                 GameObject newPipes = Instantiate(pipes);

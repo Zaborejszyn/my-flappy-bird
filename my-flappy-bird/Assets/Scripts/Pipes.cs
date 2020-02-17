@@ -1,17 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Pipes : MonoBehaviour {
     private float horizontalSpeed;
     private Bird bird;
-    
-    void Start() {
+
+    private void Awake() {
         horizontalSpeed = GameObject.Find("Background").GetComponent<Background>().horizontalSpeed;
         bird = GameObject.Find("Bird").GetComponent<Bird>();
     }
+
+    private void Start() {
+    }
     
-    void Update() {
+    private void Update() {
         Transform transform1 = transform;
         if (!bird.GetIsDead()) {
             transform1.position += Vector3.left * (horizontalSpeed * Time.deltaTime);

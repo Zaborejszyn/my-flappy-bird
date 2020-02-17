@@ -9,15 +9,20 @@ public class Bird : MonoBehaviour {
     public float upForce = 200;
     private bool isDead;
     private bool onPipe;
-    public Rigidbody2D rb;
-    public Animator anim;
+    private Rigidbody2D rb;
+    private Animator anim;
     private static readonly int IsDead = Animator.StringToHash("IsDead");
     private Vector2 lastVelocity;
 
-    void Start() {
+    private void Awake() {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
-    void Update() {
+    private void Start() {
+    }
+
+    private void Update() {
         if (!isDead) {
             Vector2 vel = rb.velocity;
             float ang = Mathf.Atan2(vel.y, 10) * Mathf.Rad2Deg;
@@ -72,7 +77,11 @@ public class Bird : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        onPipe = true;
-        anim.SetBool(IsDead, true);
+        if (other.gameObject.tag.Equals("checkpoint")) {
+            onPipe = true;
+            anim.SetBool(IsDead, true);
+        } else {
+            
+        }
     }
 }

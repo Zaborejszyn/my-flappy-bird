@@ -324,8 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bdd6d3a55c5eab47a462f8ac19819b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashSpeed: 10
-  sr: {fileID: 192631839}
+  splashSpeed: 15
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,8 +622,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upForce: 125
-  rb: {fileID: 1332403345}
-  anim: {fileID: 1332403343}
 --- !u!50 &1332403345
 Rigidbody2D:
   serializedVersion: 4
