@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Bird : MonoBehaviour {
     public float upForce = 200;
@@ -77,11 +78,11 @@ public class Bird : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag.Equals("checkpoint")) {
+        if (!isDead && !onPipe && other.gameObject.name.Equals("Pointer")) {
+            ScoreText.Score++;
+        } else {
             onPipe = true;
             anim.SetBool(IsDead, true);
-        } else {
-            
         }
     }
 }

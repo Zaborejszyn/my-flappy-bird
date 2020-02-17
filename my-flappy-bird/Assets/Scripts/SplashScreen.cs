@@ -16,7 +16,6 @@ public class SplashScreen : MonoBehaviour {
     }
 
     private void Start() {
-        bird = GameObject.Find("Bird").GetComponent<Bird>();
     }
 
     private void Update() {
