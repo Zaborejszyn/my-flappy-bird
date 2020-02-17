@@ -7,15 +7,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class Bird : MonoBehaviour {
-    public float upForce = 200;
+    public float upForce;
+    public static bool GameStarted;
     private bool isDead;
     private bool onPipe;
+    private GameHandler gameHandler;
     private Rigidbody2D rb;
     private Animator anim;
     private static readonly int IsDead = Animator.StringToHash("IsDead");
     private Vector2 lastVelocity;
 
     private void Awake() {
+        gameHandler = GameObject.Find("Game Handler").GetComponent<GameHandler>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -24,19 +27,23 @@ public class Bird : MonoBehaviour {
     }
 
     private void Update() {
-        if (!isDead) {
-            Vector2 vel = rb.velocity;
-            float ang = Mathf.Atan2(vel.y, 10) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, ang));
-            if (!onPipe) {
-                if (IsTapped()) {
-                    rb.velocity = Vector2.zero;
-                    rb.AddForce(new Vector2(0, upForce));
+        if (GameStarted) {
+            rb.gravityScale = 1;
+            if (!isDead) {
+                Vector2 vel = rb.velocity;
+                float ang = Mathf.Atan2(vel.y, 10) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, ang));
+                if (!onPipe) {
+                    if (IsTapped()) {
+                        rb.velocity = Vector2.zero;
+                        rb.AddForce(new Vector2(0, upForce));
+                    }
                 }
             }
         } else {
             if (IsTapped()) {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                rb.velocity = Vector2.zero;
+                rb.AddForce(new Vector2(0, upForce));
             }
         }
     }
@@ -49,10 +56,12 @@ public class Bird : MonoBehaviour {
         if (Input.touchCount > 0) {
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began) {
+                GameStarted = true;
                 return true;
             }
         }
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
+            GameStarted = true;
             return true;
         }
         return false;
@@ -75,6 +84,7 @@ public class Bird : MonoBehaviour {
         }
         isDead = true;
         anim.SetBool(IsDead, true);
+        gameHandler.ShowRestartMenu();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -83,6 +93,7 @@ public class Bird : MonoBehaviour {
         } else {
             onPipe = true;
             anim.SetBool(IsDead, true);
+            gameHandler.ShowRestartMenu();
         }
     }
 }
