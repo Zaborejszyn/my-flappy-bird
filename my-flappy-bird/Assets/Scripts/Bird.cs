@@ -24,6 +24,7 @@ public class Bird : MonoBehaviour {
     }
 
     private void Start() {
+        GameStarted = false;
     }
 
     private void Update() {
@@ -75,6 +76,16 @@ public class Bird : MonoBehaviour {
         return onPipe;
     }
 
+    private void GameOver(string cause) {
+        if (cause.Equals("isDead")) {
+            isDead = true;
+        } else if (cause.Equals("onPipe")) {
+            onPipe = true;
+        }
+        anim.SetBool(IsDead, true);
+        gameHandler.ShowRestartMenu();
+    }
+
     private void OnCollisionEnter2D(Collision2D other) {
         if (!isDead) {
             if (other.gameObject.name.Equals("Ground")) {
@@ -82,18 +93,14 @@ public class Bird : MonoBehaviour {
                 rb.AddTorque(lastVelocity.y + 3);
             }
         }
-        isDead = true;
-        anim.SetBool(IsDead, true);
-        gameHandler.ShowRestartMenu();
+        GameOver("isDead");
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (!isDead && !onPipe && other.gameObject.name.Equals("Pointer")) {
             ScoreText.Score++;
         } else {
-            onPipe = true;
-            anim.SetBool(IsDead, true);
-            gameHandler.ShowRestartMenu();
+            GameOver("onPipe");
         }
     }
 }
