@@ -928,7 +928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 014939e9386d8d54983681747a7d5877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 1.1
+  waitTime: 1.05
   pipes: {fileID: 408859643465540597, guid: f6c8020a19a582a43afb4ba357638160, type: 3}
   height: 0.5
 --- !u!4 &1741802983
