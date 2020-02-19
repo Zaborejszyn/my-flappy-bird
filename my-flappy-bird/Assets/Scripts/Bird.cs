@@ -34,11 +34,9 @@ public class Bird : MonoBehaviour {
                 Vector2 vel = rb.velocity;
                 float ang = Mathf.Atan2(vel.y, 10) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, ang));
-                if (!onPipe) {
-                    if (IsTapped()) {
-                        rb.velocity = Vector2.zero;
-                        rb.AddForce(new Vector2(0, upForce));
-                    }
+                if (!onPipe && IsTapped()) {
+                    rb.velocity = Vector2.zero;
+                    rb.AddForce(new Vector2(0, upForce));
                 }
             }
         } else {
