@@ -13,14 +13,14 @@ public class Bird : MonoBehaviour {
     private bool onPipe;
     private GameHandler gameHandler;
     private Rigidbody2D rb;
-    private Animator anim;
+    private Animator animator;
     private static readonly int IsDead = Animator.StringToHash("IsDead");
     private Vector2 lastVelocity;
 
     private void Awake() {
         gameHandler = GameObject.Find("Game Handler").GetComponent<GameHandler>();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start() {
@@ -80,7 +80,8 @@ public class Bird : MonoBehaviour {
         } else if (cause.Equals("onPipe")) {
             onPipe = true;
         }
-        anim.SetBool(IsDead, true);
+        //anim.wrapMode = WrapMode.Once;
+        animator.SetBool(IsDead, true);
         gameHandler.ShowRestartMenu();
     }
 
