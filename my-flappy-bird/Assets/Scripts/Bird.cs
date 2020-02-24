@@ -15,6 +15,7 @@ public class Bird : MonoBehaviour {
     private Rigidbody2D rb;
     private Animator animator;
     public Animator splashScreenAnimator;
+    public float splashScreenAnimationTime;
     private static readonly int IsDead = Animator.StringToHash("IsDead");
     private Vector2 lastVelocity;
     private static readonly int SplashScreen = Animator.StringToHash("SplashScreen");
@@ -82,12 +83,12 @@ public class Bird : MonoBehaviour {
         } else if (cause.Equals("onPipe")) {
             onPipe = true;
         }
-        StartCoroutine(SplashScreenAnimation(1 / 6f));
+        StartCoroutine(SplashScreenAnimation(splashScreenAnimationTime));
     }
 
-    private IEnumerator SplashScreenAnimation(float animationTime) {
+    private IEnumerator SplashScreenAnimation(float time) {
         splashScreenAnimator.SetTrigger(SplashScreen);
-        yield return new WaitForSeconds(animationTime);
+        yield return new WaitForSeconds(time);
         animator.SetBool(IsDead, true);
         gameHandler.ShowRestartMenu();
     }
@@ -98,15 +99,17 @@ public class Bird : MonoBehaviour {
                 rb.AddForce(new Vector2(Mathf.Abs(lastVelocity.y) * 15, 15));
                 rb.AddTorque(lastVelocity.y + 3);
             }
+            GameOver("isDead");
         }
-        GameOver("isDead");
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (!isDead && !onPipe && other.gameObject.name.Equals("Pointer")) {
-            ScoreText.Score++;
-        } else {
-            GameOver("onPipe");
+        if (!onPipe) {
+            if (!isDead && other.gameObject.name.Equals("Pointer")) {
+                ScoreText.Score++;
+            } else {
+                GameOver("onPipe");
+            }
         }
     }
 }

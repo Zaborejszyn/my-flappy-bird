@@ -369,8 +369,8 @@ CanvasGroup:
   m_GameObject: {fileID: 308442551}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &308442554
 MonoBehaviour:
@@ -799,6 +799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upForce: 125
   splashScreenAnimator: {fileID: 308442552}
+  splashScreenAnimationTime: 0.16666667
 --- !u!50 &1332403345
 Rigidbody2D:
   serializedVersion: 4
