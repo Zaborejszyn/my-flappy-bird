@@ -14,8 +14,10 @@ public class Bird : MonoBehaviour {
     private GameHandler gameHandler;
     private Rigidbody2D rb;
     private Animator animator;
+    public Animator splashScreenAnimator;
     private static readonly int IsDead = Animator.StringToHash("IsDead");
     private Vector2 lastVelocity;
+    private static readonly int SplashScreen = Animator.StringToHash("SplashScreen");
 
     private void Awake() {
         gameHandler = GameObject.Find("Game Handler").GetComponent<GameHandler>();
@@ -80,7 +82,12 @@ public class Bird : MonoBehaviour {
         } else if (cause.Equals("onPipe")) {
             onPipe = true;
         }
-        //anim.wrapMode = WrapMode.Once;
+        StartCoroutine(SplashScreenAnimation(1 / 6f));
+    }
+
+    private IEnumerator SplashScreenAnimation(float animationTime) {
+        splashScreenAnimator.SetTrigger(SplashScreen);
+        yield return new WaitForSeconds(animationTime);
         animator.SetBool(IsDead, true);
         gameHandler.ShowRestartMenu();
     }
